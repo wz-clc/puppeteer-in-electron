@@ -9,6 +9,7 @@ type BrowserView = import("electron").BrowserView;
 type puppeteer = typeof import("puppeteer-core");
 type Browser = import("puppeteer-core").Browser;
 type Page = import("puppeteer-core").Page;
+type ConnectOptions = import("puppeteer-core").ConnectOptions;
 
 const readJson = async (port: string): Promise<any> => new Promise((resolve, reject) => {
   let json = "";
@@ -81,9 +82,10 @@ export const initialize = async (app: App, port = 0): Promise<void> => {
  * When connecting multiple times, you use the same port.
  * @param {App} app The app imported from electron.
  * @param {puppeteer} puppeteer The imported puppeteer namespace.
+ * @param {ConnectOptions} options The options imported from ConnectOptions.
  * @returns {Promise<Browser>} An object containing the puppeteer browser, the port, and json received from DevTools.
  */
-export const connect = async (app: App, puppeteer: puppeteer): Promise<Browser> => {
+export const connect = async (app: App, puppeteer: puppeteer, options: ConnectOptions = {}): Promise<Browser> => {
   if (!puppeteer) {
     throw new Error("The parameter 'puppeteer' was not passed in.");
   }
@@ -98,7 +100,8 @@ export const connect = async (app: App, puppeteer: puppeteer): Promise<Browser> 
 
   const browser = await puppeteer.connect({
     browserWSEndpoint: json.webSocketDebuggerUrl,
-    defaultViewport: null
+    defaultViewport: null,
+    ...options
   });
 
   return browser;

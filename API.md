@@ -28,7 +28,7 @@ When connecting multiple times, you use the same port.
 
 -   `app` **App** The app imported from electron.
 -   `puppeteer` **puppeteer** The imported puppeteer namespace.
-
+-   `options` **options** The options imported from ConnectOptions.
 Returns **[Promise][9]&lt;Browser>** An object containing the puppeteer browser, the port, and json received from DevTools.
 
 ## getPage

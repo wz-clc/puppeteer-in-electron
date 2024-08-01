@@ -1,6 +1,6 @@
 {
-  "name": "puppeteer-in-electron",
-  "version": "3.0.5",
+  "name": "puppeteer-in-electron-personal",
+  "version": "3.0.6-beta.1",
   "description": "Run puppeteer within an electron app.",
   "main": "./bin/index.js",
   "scripts": {
@@ -11,20 +11,19 @@
     "testPack": "./dist/puppeteer-in-electron-linux-x64/puppeteer-in-electron",
     "all": "npm run lint && npm run build && npm run test && npm run pack && npm run testPack"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/TrevorSundberg/puppeteer-in-electron.git"
-  },
   "keywords": [
     "electron",
     "puppeteer"
   ],
-  "author": "Trevor Sundberg",
+  "author": {
+    "name": "wz-clc",
+    "email": "617901562@QQ.COM"
+  },
   "license": "MIT",
   "dependencies": {
     "@types/async-retry": "^1.4.1",
     "@types/node-fetch": "^2.5.4",
-    "@types/puppeteer-core": "^1.9.0",
+    "@types/puppeteer-core": "^5.4.0",
     "@types/uuid": "^3.4.6",
     "async-retry": "^1.3.1",
     "get-port": "^5.1.1",
@@ -36,7 +35,7 @@
     "electron": "^13.1.2",
     "electron-packager": "^15.2.0",
     "eslint": "^7.28.0",
-    "puppeteer-core": "^10.0.0",
+    "puppeteer-core": "^18.0.1",
     "typescript": "^4.3.2"
   }
 }
