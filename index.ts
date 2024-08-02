@@ -1,12 +1,19 @@
 import getPort from "get-port";
 import http from "http";
 import retry from "async-retry";
-import {v4} from "uuid";
+import { v4 } from "uuid";
+import puppeteerCore from 'puppeteer-core'
+import puppeteerExtra from 'puppeteer-extra'
 
 type App = import("electron").App;
 type BrowserWindow = import("electron").BrowserWindow;
 type BrowserView = import("electron").BrowserView;
-type puppeteer = typeof import("puppeteer-core");
+
+type puppeteer1 = typeof import("puppeteer-core")
+type puppeteer2 = typeof puppeteerExtra
+type puppeteer3 = (typeof puppeteerCore & typeof puppeteerExtra)
+type puppeteer = puppeteer1 | puppeteer2 | puppeteer3
+
 type Browser = import("puppeteer-core").Browser;
 type Page = import("puppeteer-core").Page;
 type ConnectOptions = import("puppeteer-core").ConnectOptions;
@@ -55,7 +62,7 @@ export const initialize = async (app: App, port = 0): Promise<void> => {
     throw new Error("The electron application is already listening on a port. Double `initialize`?");
   }
 
-  const actualPort = port === 0 ? await getPort({host: "127.0.0.1"}) : port;
+  const actualPort = port === 0 ? await getPort({ host: "127.0.0.1" }) : port;
   app.commandLine.appendSwitch(
     "remote-debugging-port",
     `${actualPort}`
@@ -68,7 +75,7 @@ export const initialize = async (app: App, port = 0): Promise<void> => {
     app.getVersion().split(".")[0],
     10
   );
-    // NetworkService crashes in electron 6.
+  // NetworkService crashes in electron 6.
   if (electronMajor >= 7) {
     app.commandLine.appendSwitch(
       "enable-features",
@@ -104,7 +111,7 @@ export const connect = async (app: App, puppeteer: puppeteer, options: ConnectOp
     ...options
   });
 
-  return browser;
+  return browser as Browser;
 };
 
 /**

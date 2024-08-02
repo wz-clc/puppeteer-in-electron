@@ -1,7 +1,11 @@
-import {BrowserWindow, app} from "electron";
+import { BrowserWindow, app } from "electron";
 import assert from "assert";
 import pie from "./index";
-import puppeteer from "puppeteer-core";
+import puppeteerCore from 'puppeteer-core'
+import puppeteerExtra from 'puppeteer-extra'
+
+type Puppeteer = typeof puppeteerCore & typeof puppeteerExtra
+const puppeteer = puppeteerExtra as Puppeteer
 
 const main = async () => {
   await pie.initialize(app);
